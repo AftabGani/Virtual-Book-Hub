@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .background-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("/media/covers/pic2.jpg");
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+      /* opacity: 0.6; Reduced opacity for better readability */
+    }
+
+    /* Form Container */
+    
+      /* Form Container */
+      .form-container {
+        background: #ffffff;
+        border-radius: 10px;
+        padding: 2rem;
+        max-width: 380px;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        position: relative;
+        z-index: 1;
+        animation: fadeInUp 1s ease-out;
+      }
+
+      /* Heading Styles */
+      .form-container h2 {
+        color: #fff;
+        background-color: #0a5db6;
+        padding: 1rem;
+        margin: -2rem -2rem 2rem -2rem;
+        font-size: 1.8rem;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+
+    /* Form */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    form input,
+    form button {
+      padding: 0.75rem;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      font-size: 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    form input:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      outline: none;
+    }
+
+    form button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    form button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Error Messages */
+    .errorlist {
+      color: red;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+
+    .errorlist li {
+      margin-bottom: 5px;
+    }
+
+    /* Additional Text */
+    .additional-info {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .additional-info a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .additional-info a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="background-image"></div>
+  <div class="form-container">
+    <h2>Register</h2>
+    <form method="post">
+      {% csrf_token %}
+      <div>
+        <label for="id_username">Username:</label>
+        <input type="text" name="username" id="id_username" required />
+        {% if form.username.errors %}
+        <ul class="errorlist">
+          {% for error in form.username.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      <div>
+        <label for="id_first_name">First Name:</label>
+        <input type="text" name="first_name" id="id_first_name" required />
+        {% if form.first_name.errors %}
+        <ul class="errorlist">
+          {% for error in form.first_name.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      <div>
+        <label for="id_last_name">Last Name:</label>
+        <input type="text" name="last_name" id="id_last_name" required />
+        {% if form.last_name.errors %}
+        <ul class="errorlist">
+          {% for error in form.last_name.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      <div>
+        <label for="id_email">Email:</label>
+        <input type="email" name="email" id="id_email" required />
+        {% if form.email.errors %}
+        <ul class="errorlist">
+          {% for error in form.email.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      <div>
+        <label for="id_password1">Password:</label>
+        <input type="password" name="password1" id="id_password1" required />
+        {% if form.password1.errors %}
+        <ul class="errorlist">
+          {% for error in form.password1.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      <div>
+        <label for="id_password2">Confirm Password:</label>
+        <input type="password" name="password2" id="id_password2" required />
+        {% if form.password2.errors %}
+        <ul class="errorlist">
+          {% for error in form.password2.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      <button type="submit">Register</button>
+    </form>
+    <div class="additional-info">
+      <p>
+        Already have an account? <a href="{% url 'login' %}">Login here</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>
